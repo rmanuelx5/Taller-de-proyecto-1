@@ -1,0 +1,22 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/out": true,
+            "**/*.o": true,
+            "**/*.d": true
+        },
+        "search.exclude": {
+            "**/out": true,
+            "**/*.o": true,
+            "**/*.d": true,
+            "**/*.bin": true,
+            "**/*.hex": true,
+            "**/*.elf": true
+        }
+    }
+}

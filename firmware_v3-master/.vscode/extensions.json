@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-vscode.cpptools",
+        "marus25.cortex-debug",
+        "dan-c-underwood.arm",
+        "ms-vscode.makefile-tools",
+        "twxs.cmake",
+        "ms-vscode.hexeditor"
+    ]
+}

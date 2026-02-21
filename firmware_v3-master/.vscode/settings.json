@@ -1,0 +1,58 @@
+{
+    // Configuración EDU-CIAA-NXP
+    "educiaa.programPath": "examples/c/sapi/gpio",
+    "educiaa.programName": "blinky",
+    "educiaa.board": "edu_ciaa_nxp",
+    
+    // Archivos a excluir de la búsqueda
+    "files.exclude": {
+        "**/.git": true,
+        "**/out": true,
+        "**/*.o": true,
+        "**/*.d": true,
+        "**/*.elf": true,
+        "**/*.bin": true,
+        "**/*.hex": true,
+        "**/*.map": true,
+        "**/*.lst": true
+    },
+    
+    // Configuración del terminal
+    "terminal.integrated.shell.windows": "powershell.exe",
+    
+    // Configuración de C/C++
+    "C_Cpp.default.configurationProvider": "ms-vscode.cpptools",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json",
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.errorSquiggles": "enabled",
+    
+    // Asociación de archivos
+    "files.associations": {
+        "*.h": "c",
+        "*.c": "c",
+        "*.ld": "linkerscript",
+        "*.mk": "makefile",
+        "Makefile": "makefile"
+    },
+    
+    // Configuración del editor
+    "editor.formatOnSave": false,
+    "editor.tabSize": 3,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    
+    // Cortex-Debug
+    "cortex-debug.armToolchainPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2021.10/bin",
+    "cortex-debug.openocdPath": "openocd",
+    "cortex-debug.gdbPath": "arm-none-eabi-gdb",
+    
+    // Configuración de Make
+    "makefile.extensionOutputFolder": ".vscode",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "${workspaceFolder}",
+            "binaryPath": "${workspaceFolder}/${config:educiaa.programPath}/${config:educiaa.programName}/out/${config:educiaa.programName}.elf",
+            "binaryArgs": []
+        }
+    ]
+}

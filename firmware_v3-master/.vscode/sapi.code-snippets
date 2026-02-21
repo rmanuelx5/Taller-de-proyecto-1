@@ -1,0 +1,242 @@
+{
+    "SAPI Delay": {
+        "prefix": "sapi_delay",
+        "body": [
+            "delay(${1:1000});"
+        ],
+        "description": "Delay en milisegundos"
+    },
+    "SAPI Delay ms": {
+        "prefix": "sapi_delayms",
+        "body": [
+            "delay(${1:1000});"
+        ],
+        "description": "Delay en milisegundos"
+    },
+    "SAPI Board Init": {
+        "prefix": "sapi_init",
+        "body": [
+            "boardInit();"
+        ],
+        "description": "Inicializar la placa EDU-CIAA-NXP"
+    },
+    "SAPI GPIO Write": {
+        "prefix": "sapi_gpio_write",
+        "body": [
+            "gpioWrite(${1:LEDB}, ${2:ON});"
+        ],
+        "description": "Escribir estado digital en un pin GPIO"
+    },
+    "SAPI GPIO Read": {
+        "prefix": "sapi_gpio_read",
+        "body": [
+            "gpioRead(${1:TEC1})"
+        ],
+        "description": "Leer estado digital de un pin GPIO"
+    },
+    "SAPI GPIO Toggle": {
+        "prefix": "sapi_gpio_toggle",
+        "body": [
+            "gpioToggle(${1:LEDB});"
+        ],
+        "description": "Toggle (invertir) estado de un pin GPIO"
+    },
+    "SAPI UART Config": {
+        "prefix": "sapi_uart_config",
+        "body": [
+            "uartConfig(${1:UART_USB}, ${2:115200});"
+        ],
+        "description": "Configurar UART"
+    },
+    "SAPI UART Write": {
+        "prefix": "sapi_uart_write",
+        "body": [
+            "uartWriteString(${1:UART_USB}, \"${2:Hola}\\r\\n\");"
+        ],
+        "description": "Escribir string por UART"
+    },
+    "SAPI ADC Read": {
+        "prefix": "sapi_adc_read",
+        "body": [
+            "adcRead(${1:CH1})"
+        ],
+        "description": "Leer valor analógico del ADC"
+    },
+    "SAPI DAC Write": {
+        "prefix": "sapi_dac_write",
+        "body": [
+            "dacWrite(${1:DAC}, ${2:512});"
+        ],
+        "description": "Escribir valor analógico al DAC"
+    },
+    "SAPI PWM Config": {
+        "prefix": "sapi_pwm_config",
+        "body": [
+            "pwmConfig(${1:PWM0}, ${2:PWM_ENABLE});"
+        ],
+        "description": "Configurar PWM"
+    },
+    "SAPI PWM Write": {
+        "prefix": "sapi_pwm_write",
+        "body": [
+            "pwmWrite(${1:PWM0}, ${2:128});"
+        ],
+        "description": "Escribir valor de duty cycle al PWM (0-255)"
+    },
+    "SAPI Main Template": {
+        "prefix": "sapi_main",
+        "body": [
+            "#include \"sapi.h\"",
+            "",
+            "int main(void) {",
+            "    // Inicializar placa",
+            "    boardInit();",
+            "",
+            "    ${1:// Tu código aquí}",
+            "",
+            "    while(1) {",
+            "        ${2:// Loop principal}",
+            "    }",
+            "",
+            "    return 0;",
+            "}"
+        ],
+        "description": "Template básico con SAPI"
+    },
+    "SAPI Blinky Example": {
+        "prefix": "sapi_blinky",
+        "body": [
+            "#include \"sapi.h\"",
+            "",
+            "int main(void) {",
+            "    // Inicializar placa",
+            "    boardInit();",
+            "",
+            "    // Loop infinito",
+            "    while(1) {",
+            "        gpioToggle(${1:LEDB});",
+            "        delay(${2:500});",
+            "    }",
+            "",
+            "    return 0;",
+            "}"
+        ],
+        "description": "Ejemplo completo de blinky LED"
+    },
+    "SAPI Button LED": {
+        "prefix": "sapi_button_led",
+        "body": [
+            "#include \"sapi.h\"",
+            "",
+            "int main(void) {",
+            "    // Inicializar placa",
+            "    boardInit();",
+            "",
+            "    // Loop infinito",
+            "    while(1) {",
+            "        if (gpioRead(${1:TEC1})) {",
+            "            gpioWrite(${2:LEDB}, ON);",
+            "        } else {",
+            "            gpioWrite(${2:LEDB}, OFF);",
+            "        }",
+            "    }",
+            "",
+            "    return 0;",
+            "}"
+        ],
+        "description": "Ejemplo de botón controlando LED"
+    },
+    "SAPI Tick Hook Config": {
+        "prefix": "sapi_tick_hook",
+        "body": [
+            "tickConfig(${1:1});",
+            "tickCallbackSet(${2:myTickHook}, NULL);"
+        ],
+        "description": "Configurar Tick Hook (interrupción periódica)"
+    },
+    "SAPI Printf": {
+        "prefix": "sapi_printf",
+        "body": [
+            "printf(\"${1:Mensaje}: %${2:d}\\r\\n\", ${3:valor});"
+        ],
+        "description": "Printf por UART (requiere stdio configurado)"
+    },
+    "FreeRTOS Task Create": {
+        "prefix": "freertos_task",
+        "body": [
+            "xTaskCreate(",
+            "    ${1:taskFunction},      // Función de la tarea",
+            "    \"${2:TaskName}\",        // Nombre de la tarea",
+            "    ${3:configMINIMAL_STACK_SIZE}, // Stack size",
+            "    ${4:NULL},              // Parámetros",
+            "    ${5:tskIDLE_PRIORITY+1}, // Prioridad",
+            "    ${6:NULL}               // Handle",
+            ");"
+        ],
+        "description": "Crear tarea de FreeRTOS"
+    },
+    "FreeRTOS Task Function": {
+        "prefix": "freertos_task_func",
+        "body": [
+            "void ${1:taskFunction}(void* taskParmPtr) {",
+            "    // Inicialización de la tarea",
+            "    ${2:// Código de inicialización}",
+            "",
+            "    // Loop infinito de la tarea",
+            "    while(1) {",
+            "        ${3:// Código de la tarea}",
+            "        ",
+            "        // Delay",
+            "        vTaskDelay(${4:1000} / portTICK_RATE_MS);",
+            "    }",
+            "}"
+        ],
+        "description": "Función de tarea de FreeRTOS"
+    },
+    "Include SAPI": {
+        "prefix": "inc_sapi",
+        "body": [
+            "#include \"sapi.h\""
+        ],
+        "description": "Include SAPI header"
+    },
+    "Include FreeRTOS": {
+        "prefix": "inc_freertos",
+        "body": [
+            "#include \"FreeRTOS.h\"",
+            "#include \"task.h\""
+        ],
+        "description": "Include FreeRTOS headers"
+    },
+    "FSM State Type": {
+        "prefix": "fsm_state_type",
+        "body": [
+            "typedef enum {",
+            "    ${1:STATE_INIT},",
+            "    ${2:STATE_1},",
+            "    ${3:STATE_2}",
+            "} ${4:state_t};"
+        ],
+        "description": "Definir tipo enumerado para estados de FSM"
+    },
+    "FSM Switch Case": {
+        "prefix": "fsm_switch",
+        "body": [
+            "switch(${1:currentState}) {",
+            "    case ${2:STATE_INIT}:",
+            "        ${3:// Código del estado}",
+            "        ${1:currentState} = ${4:NEXT_STATE};",
+            "        break;",
+            "    ",
+            "    case ${5:STATE_1}:",
+            "        ${6:// Código del estado}",
+            "        break;",
+            "    ",
+            "    default:",
+            "        ${1:currentState} = ${2:STATE_INIT};",
+            "        break;",
+            "}"
+        ],
+        "description": "Switch case para máquina de estados finitos"
+    }
+}
